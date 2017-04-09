@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.net.*;
-import java.util.*;
-//import java.util.concurrent.BlockingQueue;
+import java.util.Random;
 public class UDPServer implements Runnable {
     /**
      * The port where the client is listening.
@@ -48,19 +47,13 @@ public class UDPServer implements Runnable {
     
     public class Pilha{
     	
-        private Stack stack;
-
-		public Pilha(Stack p) {
-            this.stack = p;
-        }
+    public synchronized void push(short valor){
     	
-	    //Stack stack;
-	    public synchronized void push(short valor){
-	    	
-	    }
-	    
-	    public synchronized short pop(){
-	      	return (short) stack.pop();
-	    }
+    }
+    
+    public synchronized short pop(){
+    	
+    	return valor
+    }
     }
 }

@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.net.*;
-import java.util.*;
-//import java.util.concurrent.BlockingQueue;
+import java.util.Random;
 public class UDPServer implements Runnable {
     /**
      * The port where the client is listening.
@@ -28,7 +27,7 @@ public class UDPServer implements Runnable {
                 DatagramPacket datagramPacket = new DatagramPacket(
                         message.getBytes(),
                         message.length(),
-                        InetAddress.getByName("192.168.108.128"),
+                        InetAddress.getLocalHost(),
                         clientPort
                 );
                 serverSocket.send(datagramPacket);
@@ -44,23 +43,5 @@ public class UDPServer implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-    
-    public class Pilha{
-    	
-        private Stack stack;
-
-		public Pilha(Stack p) {
-            this.stack = p;
-        }
-    	
-	    //Stack stack;
-	    public synchronized void push(short valor){
-	    	
-	    }
-	    
-	    public synchronized short pop(){
-	      	return (short) stack.pop();
-	    }
     }
 }
