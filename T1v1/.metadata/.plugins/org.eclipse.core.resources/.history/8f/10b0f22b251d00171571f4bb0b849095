@@ -1,0 +1,17 @@
+import java.io.*;
+import java.net.*;
+
+public class Produtor {
+	public static void main(String args[]){
+		while (true) {
+			socket = new DatagramSocket(2020); // criação do endpoint na porta 2020
+			dado = new byte[TAMANHO_MAX];
+			DatagramPacket pacoteRecebido = new DatagramPacket(dado, dado.length);
+			socket.receive(pacoteRecebido);
+			ProxyCons pc = new ProxyConsumidor( pacoteRecebido.getAddress(),
+			pacoteRecebido.getPort() );
+			pc.start();
+			}		
+	}
+}
+
