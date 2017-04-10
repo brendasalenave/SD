@@ -1,0 +1,8 @@
+public class Pilha {
+
+  private List<Integer> pecas = new LinkedList<Integer>();
+  
+  public void insere(Peca peca) {
+    this.pecas.add(peca);
+  }
+}

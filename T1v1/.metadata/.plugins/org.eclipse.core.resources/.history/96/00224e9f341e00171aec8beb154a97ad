@@ -1,0 +1,64 @@
+import java.io.IOException;
+import java.net.*;
+import java.util.*;
+//import java.util.concurrent.BlockingQueue;
+public class UDPServer{
+    /**
+     * The port where the client is listening.
+     */
+	byte[] dado = new byte[10];
+	Pilha stack = new Pilha();
+    private final int clientPort;
+    public UDPServer(int clientPort) {
+        this.clientPort = clientPort;
+    }
+    
+    public void produtor(){   	    
+	    for(int i=0; i<100; i++){
+			Random rn = new Random();
+			
+			Integer num = (rn.nextInt(32767) + 1);
+			stack.push(num);
+	    }
+    }
+    
+    
+    //@Override
+    public void run() {
+        /**
+         * Create a new server socket and bind it to a free port. I have chosen
+         * one in the 49152 - 65535 range, which are allocated for internal applications
+         */
+    	while(true){
+	        try {
+	            // The server will generate 10000 messages and send them to the client
+	            // Each message will be sent at a 2 ms interval
+	            //for (int i = 0; i < 10000; i++) {
+        		DatagramSocket serverSocket = new DatagramSocket(50001);
+           	    //String message = String.valueOf(stack.pop());
+            	
+                DatagramPacket datagramPacket = new DatagramPacket(dado, dado.length);
+                serverSocket.receive(datagramPacket);
+	                
+                DatagramPacket data = new DatagramPacket(dado, dado.length);
+                serverSocket.send(datagramPacket);
+	                
+                Process proc = new Process(stack, datagramPacket.getPort(), datagramPacket.getAddress());
+                //Thread t = new Thread(proc);
+                //t.start();
+	                
+                // Wait 2 ms before sending the next message
+                //serverSocket.close();
+                Thread.sleep(20000);            
+	        } catch (SocketException e) {
+	            e.printStackTrace();
+	        } catch (UnknownHostException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+    	}
+    }  
+}

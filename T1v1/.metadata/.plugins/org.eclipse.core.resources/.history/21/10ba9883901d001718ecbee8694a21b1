@@ -1,0 +1,23 @@
+import java.net.*;
+import java.io.*;
+
+public class Servidor {
+	// criação do endpoint na porta 2020
+	ServerSocket socket = new ServerSocket(2020);
+	Socket skt = null;
+	while (true) {
+	// aguarda solicitação de conexão
+	skt = socket.accept();
+	// ligação de streams de entrada e saída
+	BufferedOutputStream buffOut = new BufferedOutputStream(skt.getOutputStream());
+	buffIn = new BufferedInputStream(skt.getInputStream());
+	// aguarda solicitação de serviço
+	dado = new byte[TAMANHO_MAX];
+	bytesLidos = buffIn.read(dado, 0, dado.length);
+	...
+	// enviar resposta ao cliente
+	dado = resposta.getBytes();
+	buffOut.write(dado, 0, dado.length);
+	buffOut.flush();
+	}
+}

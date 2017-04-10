@@ -1,0 +1,8 @@
+
+public class Process implements Runable {
+	
+	public Process (Pilha stack, int porta, InetAddress ip){
+		
+	}
+
+}
