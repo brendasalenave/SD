@@ -2,47 +2,39 @@ import java.io.*;
 import java.net.*;
 import java.util.Random;
 
-public class TCPServer {
-	Pilha stack = new Pilha();
-	// cria endpoint na porta 2020
+class TCPServer{
+	public static void main(String argv[]) throws Exception {
 
-	Socket skt;// = null;
+		Pilha stack = new Pilha();
+		ServerSocket socket = new ServerSocket(6789);
+		
+   	    for(int i=0; i<100; i++){
+   			Random rn = new Random();
+    			
+   			Integer num = (rn.nextInt(32767) + 1);
+   			stack.push(num);
+   	    }
 	
-    public void produtor(){   	    
-	    for(int i=0; i<100; i++){
-			Random rn = new Random();
-			
-			Integer num = (rn.nextInt(32767) + 1);
-			stack.push(num);
-	    }
-    }
-	
-    public void run() throws IOException{
-    	ServerSocket socket = new ServerSocket(50001);
-    	
-		while (true) {
-			try{
-			// aguarda solicitação de conexão
-			skt = socket.accept();
-			// ligação de streams de entrada e saída
+		while(true){
+			System.out.println("Aguardando solicitação de conexão...");
+			Socket skt = socket.accept();
+			// ligação de streams de entrada e saada
 			BufferedOutputStream buffOut = new BufferedOutputStream(skt.getOutputStream());
 			BufferedInputStream buffIn = new BufferedInputStream(skt.getInputStream());
-			// aguarda solicitação de serviço
+			
+			System.out.println("Aguardando requisições...");
 			byte[] dado = new byte[100];
 			int bytesLidos = buffIn.read(dado, 0, dado.length);
+			
+			System.out.println("Atendendo requisições...");
 			// enviar resposta ao cliente
-			//dado = resposta.getBytes();
+			int resposta = stack.pop();
+			String s = String.valueOf(resposta);
+			dado = s.getBytes();
+			
 			buffOut.write(dado, 0, dado.length);
 			buffOut.flush();
-			
-	        } catch (SocketException e) {
-	            e.printStackTrace();
-	        } catch (UnknownHostException e) {
-	            e.printStackTrace();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
 		}
-    }
+	}
 	
 }
