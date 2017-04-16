@@ -25,7 +25,7 @@ class TCPServer{
 				System.out.println("Aguardando solicitação de conexão...");
 				Socket skt = socket.accept();
 											
-				Process proc = new Process(stack, skt);
+				Processamento proc = new Processamento(stack, skt);
                 Thread t = new Thread(proc);
 				t.start();
 				
