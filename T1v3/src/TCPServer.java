@@ -22,7 +22,7 @@ class TCPServer{
 	
 		while(true){
 			try{
-				System.out.println("Aguardando solicitação de conexão...");
+				//System.out.println("Aguardando solicitação de conexão...");
 				Socket skt = socket.accept();
 											
 				Processamento proc = new Processamento(stack, skt);

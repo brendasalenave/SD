@@ -5,8 +5,6 @@ import java.net.*;
 
 public class Process implements Runnable{
 	private Pilha stack;
-	private int porta;
-	private InetAddress ip;
 	private Socket skt;
 
 	public Process (Pilha stack, Socket skt){

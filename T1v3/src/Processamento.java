@@ -1,6 +1,8 @@
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.*;
 
 public class Processamento implements Runnable{
@@ -18,11 +20,11 @@ public class Processamento implements Runnable{
 	public void run(){
 		
 		// ligação de streams de entrada e saida
-		BufferedOutputStream buffOut;
-		BufferedInputStream buffIn = null;
+		ObjectOutputStream buffOut;
+		ObjectInputStream buffIn = null;
 		try {
-			buffOut = new BufferedOutputStream(skt.getOutputStream());
-			buffIn = new BufferedInputStream(skt.getInputStream());
+			buffOut = new ObjectOutputStream(skt.getOutputStream());
+			buffIn = new ObjectInputStream(skt.getInputStream());
 			
 			//System.out.println("Aguardando requisições...");
 			byte[] dado = new byte[100];

@@ -3,10 +3,12 @@ import java.net.*;
 import java.util.Random;
 
 class TCPServer{
+	private static ServerSocket socket;
+
 	public static void main(String argv[]) throws Exception {
 
 		Pilha stack = new Pilha();
-		ServerSocket socket = new ServerSocket(6789);
+		socket = new ServerSocket(6789);
 		
    	    stack.push(0);
    	    stack.push(0);
@@ -22,7 +24,7 @@ class TCPServer{
 	
 		while(true){
 			try{
-				System.out.println("Aguardando solicitação de conexão...");
+				//System.out.println("Aguardando solicitação de conexão...");
 				Socket skt = socket.accept();
 											
 				Process proc = new Process(stack, skt);

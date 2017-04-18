@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.net.*;
 import java.util.*;
-//import java.util.concurrent.BlockingQueue;
+
 public class UDPServer{
     /**
      * The port where the client is listening.
@@ -25,19 +25,11 @@ public class UDPServer{
     
     //@Override
     public void run() throws SocketException {
-        /**
-         * Create a new server socket and bind it to a free port. I have chosen
-         * one in the 49152 - 65535 range, which are allocated for internal applications
-         */
+
     	DatagramSocket serverSocket = new DatagramSocket(2020);
     	while(true){
 	        try {
-	            // The server will generate 10000 messages and send them to the client
-	            // Each message will be sent at a 2 ms interval
-	            //for (int i = 0; i < 10000; i++) {
-        		
-           	    //String message = String.valueOf(stack.pop());
-            	
+
                 DatagramPacket datagramPacket = new DatagramPacket(dado, 100);
                 serverSocket.receive(datagramPacket);
 	                
@@ -48,8 +40,7 @@ public class UDPServer{
                 System.out.println(m);
                 
                 Process proc = new Process(stack, datagramPacket.getPort(), datagramPacket.getAddress());
-                //DatagramPacket d = new DatagramPacket("0".getBytes(),"0".getBytes().length,data.getAddress(), data.getPort());
-                //serverSocket.send(d);
+
                 Thread t = new Thread(proc);
                 t.start();
 	                

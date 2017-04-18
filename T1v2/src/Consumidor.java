@@ -1,16 +1,18 @@
 import java.io.*;
 import java.net.*;
+import java.util.Random;
 
 public class Consumidor {
 	static int porta = 6789;
+	private static Socket socket;
 	
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
     	int somatorio = 0;
     	
     	while(true){
 	    	byte[] dado = new byte[100];
 	    	InetAddress ip = InetAddress.getByName("localHost");
-	    	Socket socket = new Socket(ip, porta); // criação do endpoint
+	    	socket = new Socket(ip, porta);
 	    	
 	    	// ligação de streams de entrada e saida
 	    	BufferedOutputStream buffOut = new BufferedOutputStream(socket.getOutputStream());
@@ -31,6 +33,9 @@ public class Consumidor {
 	    		break;
 	    	}
 	    	somatorio += valorInteiro;
+	    	
+	    	Random r = new Random();
+			Thread.sleep(r.nextInt(50)+50);
     	} 
     }
 }
